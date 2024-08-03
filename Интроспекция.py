@@ -1,20 +1,16 @@
 from pprint import pprint
-import inspect
 
-some_list = [1, 2, 3]
+list_ = [1, 2, 3, 4, 5]
 
 
 def introspection_info(x):
     info = {
         'type': type(x),
-        'methods and attributes': dir(x),
-        'module': inspect.ismodule(x),
-        'isinstance': isinstance(x, list),
-        'isfunction': inspect.isfunction(x),
-        'iscallable': callable(x),
+        'attributes': [i for i in dir(x) if i.startswith('_')],
+        'methods': [i for i in dir(x) if not i.startswith('_')],
+        'module': type(x).__module__
     }
-
     return info
 
 
-pprint(introspection_info(some_list))
+pprint(introspection_info(list_))
